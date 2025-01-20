@@ -28,7 +28,7 @@ const data = await fetch('https://raw.githubusercontent.com/devchallenges-io/cur
 	</div>
 	<div class="grid grid-cols-3 gap-x-8 gap-y-7">
 		{data.map((coffee: any) => (
-			<Card name={coffee.name} />
+			<Card name={coffee.name} price={coffee.price} img={coffee.image}/>
 		))}
 	
 	</div>
