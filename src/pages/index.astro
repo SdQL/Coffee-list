@@ -14,6 +14,9 @@ const data = await fetch('https://raw.githubusercontent.com/devchallenges-io/cur
 		return [];
 	})
 
+const availableProducts = data.filter((coffee: any) => coffee.available === true);
+
+
 
 
 
