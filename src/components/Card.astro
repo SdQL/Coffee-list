@@ -1,16 +1,17 @@
 ---
 const { name, price, img } = Astro.props;
 
+
 ---
 
 
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
-        <img class="rounded-t-lg" src="https://csyxkpbavpcrhwqhcpyy.supabase.co/storage/v1/object/public/assets/coffee-challenge/cappuccino.jpg" alt="" />
+        <img class="rounded-t-lg" src={img} alt="" />
     </a>
     <div class="p-5">
         <a href="#">
-            <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{name}</h5> 
+            <h5 class="mb-2 text-sm font-bold tracking-tight text-gray-900 dark:text-white">{name}<span class="ml-5 mr-5 bg-white text-black text-xs p-1 rounded-lg">{price}</span></h5> 
         </a>
         
     </div>
