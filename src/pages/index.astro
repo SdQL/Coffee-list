@@ -2,6 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 
+const data = await fetch('https://raw.githubusercontent.com/devchallenges-io/curriculum/refs/heads/main/4-frontend-libaries/challenges/group_1/data/simple-coffee-listing-data.json')
+	.then((response) => {
+		if(!response.ok) {
+			throw new Error('Failed to fetch data');
+		}
+		return response.json(); 
+	})
+	.catch((error) => {
+		console.error(error);
+		return [];
+	})
+
+
+
+
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -11,8 +26,10 @@ import Card from '../components/Card.astro';
 		<h1 class="text-3xl">Our collection</h1>
 		<h3 class="text-sm text-gray-600 px-20 pb-12">Introducing our Coffee Collection, a selection of unique coffees from different roast types and origins, expertly roasted in small batches and shipped fresh weekly.</h3>
 	</div>
-	<div class="grid grid-cols-3 gap-x-36 gap-y-7">
-		<Card name="Cappuccino" price="50" img=""/>
+	<div class="grid grid-cols-3 gap-x-8 gap-y-7">
+		{data.map((coffee: any) => (
+			<Card name={coffee.name} />
+		))}
 	
 	</div>
 </Layout>
