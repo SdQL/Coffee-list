@@ -1,30 +1,83 @@
 ---
 export interface Props {
     coffee: {
-        name: string,
-        image: string,
-        price: string,
-        rating: number,
-        votes: number,
-        popular: boolean,
-        available: boolean
+        name: string;
+        image: string;
+        price: string;
+        rating: number;
+        votes: number;
+        popular: boolean;
+        available: boolean;
+    };
+}
+function popularFun(popular: boolean) {
+    if (popular === true) {
+        return popular ? "popular" : "";
     }
 }
 
-const { name, price, image, rating, votes, popular, available } = Astro.props.coffee;
+function availableFun(available: boolean) {
+    if (available === false) {
+        return available ? "" : "Sold out";
+    }
+}
 
+const { name, price, image, rating, votes, popular, available } =
+    Astro.props.coffee;
 
+import StarIcon from "../components/StarIcon.astro";
 ---
 
+<style>
+    img {
+        aspect-ratio: 13/8;
+    }
+</style>
 
-<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <a href="#">
-        <img class="rounded-t-lg" src={image} alt="" />
-    </a>
-    <div class="p-5">
-        <a href="#">
-            <h5 class="mb-2 text-sm font-bold tracking-tight text-gray-900 dark:text-white">{name}<span class="ml-5 mr-5 bg-white text-black text-xs p-1 rounded-lg">{price}</span></h5> 
-        </a>
-        
+<article class="w-72">
+    <div>
+        {
+            popularFun(popular) && (
+                <p class="bg-yellow-600 w-fit px-4 rounded-xl text-black absolute z-10 m-2">
+                    {popularFun(popular)}
+                </p>
+            )
+        }
+        <img
+            class="rounded-lg cursor-pointer hover:scale-110 duration-300 ease-in-out relative -z-10"
+            src={image}
+            alt=""
+        />
     </div>
-</div>
+
+    <div class="mt-3">
+        <div class="flex justify-between items-center">
+            <p
+                class="mb-2 text-s font-bold tracking-tight text-gray-900 dark:text-white"
+            >
+                {name}
+            </p>
+            <span
+                class="mr-7 bg-green-200 text-black text-xs px-4 py-1 rounded-lg hover:translate-x-1 duration-200 ease-in-out cursor-pointer"
+                >{price}</span
+            >
+        </div>
+
+        <div class="flex justify-between mr-7 mt-2">
+            <div class="flex gap-x-1">
+                <StarIcon class="text-yellow-400" fill="currentColor" />
+                <p>
+                    {rating}
+                </p>
+                <p>({votes} votes)</p>
+            </div>
+            {
+                availableFun(available) && (
+                    <p class="text-red-600 font-semibold hover:translate-x-2 duration-200 ease-in-out cursor-pointer">
+                        {availableFun(available)}
+                    </p>
+                )
+            }
+        </div>
+    </div>
+</article>
