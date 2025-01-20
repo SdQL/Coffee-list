@@ -29,10 +29,19 @@ const availableProducts = data.filter((coffee: Coffee) => coffee.available === t
 		<h1 class="text-3xl">Our collection</h1>
 		<h3 class="text-sm text-gray-600 px-20 pb-12">Introducing our Coffee Collection, a selection of unique coffees from different roast types and origins, expertly roasted in small batches and shipped fresh weekly.</h3>
 	</div>
-	<div class="grid grid-cols-3 gap-x-8 gap-y-7">
+
+<style>
+	section{
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		row-gap: 4rem;
+	}
+</style>
+
+	<section>
 		{data.map((coffee: Coffee) => (
 			<Card coffee={coffee}/>
 		))}
 	
-	</div>
+	</section>
 </Layout>
