@@ -1,20 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import { fetchCoffeeData } from '../data/fetchCoffeeData';
 
-const data = await fetch('https://raw.githubusercontent.com/devchallenges-io/curriculum/refs/heads/main/4-frontend-libaries/challenges/group_1/data/simple-coffee-listing-data.json')
-	.then((response) => {
-		if(!response.ok) {
-			throw new Error('Failed to fetch data');
-		}
-		return response.json(); 
-	})
-	.catch((error) => {
-		console.error(error);
-		return [];
-	})
+interface Coffee {
+	name: string,
+	image: string,
+	price: string,
+	rating: number,
+	votes: number,
+	popular: boolean,
+	available: boolean,
+}
 
-const availableProducts = data.filter((coffee: any) => coffee.available === true);
+const data = await fetchCoffeeData();
+const availableProducts = data.filter((coffee: Coffee) => coffee.available === true);
 
 
 
@@ -30,8 +30,8 @@ const availableProducts = data.filter((coffee: any) => coffee.available === true
 		<h3 class="text-sm text-gray-600 px-20 pb-12">Introducing our Coffee Collection, a selection of unique coffees from different roast types and origins, expertly roasted in small batches and shipped fresh weekly.</h3>
 	</div>
 	<div class="grid grid-cols-3 gap-x-8 gap-y-7">
-		{data.map((coffee: any) => (
-			<Card name={coffee.name} price={coffee.price} img={coffee.image}/>
+		{data.map((coffee: Coffee) => (
+			<Card coffee={coffee}/>
 		))}
 	
 	</div>

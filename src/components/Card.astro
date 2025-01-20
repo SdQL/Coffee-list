@@ -1,5 +1,17 @@
 ---
-const { name, price, img, rating, votes, popular, available } = Astro.props;
+export interface Props {
+    coffee: {
+        name: string,
+        image: string,
+        price: string,
+        rating: number,
+        votes: number,
+        popular: boolean,
+        available: boolean
+    }
+}
+
+const { name, price, image, rating, votes, popular, available } = Astro.props.coffee;
 
 
 ---
@@ -7,7 +19,7 @@ const { name, price, img, rating, votes, popular, available } = Astro.props;
 
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
-        <img class="rounded-t-lg" src={img} alt="" />
+        <img class="rounded-t-lg" src={image} alt="" />
     </a>
     <div class="p-5">
         <a href="#">
